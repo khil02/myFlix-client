@@ -22,7 +22,7 @@ export const MainView = () => {
                     Director: doc.Director,
 
                     Genre: doc.Genre,
-                    //Actors: PropTypes.shape({ }),
+                    //Actors: doc.Actors,
                     Featured: doc.Featured
                 };
             });
@@ -30,10 +30,28 @@ export const MainView = () => {
         });
     }, []);
     
-
+// if a movie is selected, displays the Movie-view component
         if (selectedMovie) {
+            let similarMovies = movies.filter((movie) => {
+                return movie._id !== selectedMovie._id && movie.Genre.Name == selectedMovie.Genre.Name;
+            });
             return (
-            <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+            <>
+                <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+                
+                {/* Adds similar movie list */}
+                <hr />
+                <h2>Similar Movies: </h2>
+                {similarMovies.map((movie) => (
+                <MovieCard
+                key={movie._id}
+                movie={movie}
+                onMovieClick={(newSelectedMovie) => {
+                    setSelectedMovie(newSelectedMovie);
+                }}
+                />
+            ))}
+            </>
             );
         }
 
