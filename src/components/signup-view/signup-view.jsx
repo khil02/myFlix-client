@@ -7,6 +7,8 @@ export const SignupView = () => {
     const [birthday, setBirthday] = useState("");
 
     const handleSubmit = (event) => {
+            event.preventDefault();
+
         const data = { 
             Username: username,
             Password: password,
@@ -14,7 +16,7 @@ export const SignupView = () => {
             Birthday: birthday
         };
 
-        fetch("https://my-flix882023-9b8843449882.herokuapp.com//users/register", {
+        fetch("https://my-flix882023-9b8843449882.herokuapp.com/users/register", {
             method: "POST",
             headers: {
             "Content-Type": "application/json"
