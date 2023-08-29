@@ -36,6 +36,7 @@ export const SignupView = () => {
     return (
         <form onSubmit={handleSubmit}>
             <label>
+                <hr />
                 Username:
                 <input
                     type="text"
@@ -77,6 +78,7 @@ export const SignupView = () => {
                 required
                 />
             </label>
+            <br />
             <button type="submit">Register</button>
         </form>
     );
