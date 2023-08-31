@@ -1,38 +1,83 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { LoginView } from "../login-view/login-view";
+import { SignupView } from "../signup-view/signup-view";
 
 export const MainView = () => {
-    const [movies, setMovies] = useState([
-        {
-            id: 1,
-            title: "Top Gun",
-            image: "https://upload.wikimedia.org/wikipedia/en/4/46/Top_Gun_Movie.jpg",
-            director: "Tony Scott",
-            genre: "Action",
-            description: "As students at the United States Navy's elite fighter weapons school compete to be best in the class, one daring young pilot learns a few things from a civilian instructor that are not taught in the classroom."
-        },
-        {
-            id: 2,
-            title: "Dune",
-            image: "https://upload.wikimedia.org/wikipedia/en/5/51/Dune_1984_Poster.jpg",
-            director: "David Lynch",
-            genre: "Sci-fi",
-            description: "A Duke's son leads desert warriors against the galactic emperor and his father's evil nemesis to free their desert world from the emperor's rule."
-        },
-        {
-            id: 3,
-            title: "Barbie",
-            image: "https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg",
-            director: "Greta Gerwig",
-            genre: "Comedy",
-            description: "Barbie suffers a crisis that leads her to question her world and her existence."
-        }
-    ]);
-        const [selectedMovie, setSelectedMovie] = useState(null);
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem("token");
+    const [movies, setMovies] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
+    const [ user, setUser] = useState(storedUser? storedUser : null);
+    const [ token, setToken] = useState(storedToken? storedToken : null);
 
+    useEffect(() => {
+        if (!token) return;
+
+
+        fetch("https://my-flix882023-9b8843449882.herokuapp.com/movies", {
+            headers: { Authorization: 'Bearer ${token}' }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            const moviesFromApi = data.map((doc) => {
+                return {
+                    _id: doc._id,
+                    Title: doc.Title,
+                    ImagePath: doc.ImagePath,
+                    Description: doc.Description,
+
+                    Director: doc.Director,
+
+                    Genre: doc.Genre,
+                    //Actors: doc.Actors,
+                    Featured: doc.Featured
+                };
+            });
+            setMovies(moviesFromApi);
+        });
+    }, [token]);
+
+    // Checks if user is logged in
+    if (!user) {
+        return (
+            <>
+        <LoginView 
+        onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
+        }} />
+        or
+        <SignupView />
+        </>
+        );
+    }
+    
+// if a movie is selected, displays the Movie-view component
         if (selectedMovie) {
-            return <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />;
+            let similarMovies = movies.filter((movie) => {
+                return movie._id !== selectedMovie._id && movie.Genre.Name == selectedMovie.Genre.Name;
+            });
+            return (
+            <>
+                <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+                
+                {/* Adds similar movie list */}
+                <hr />
+                <h2>Similar Movies: </h2>
+                {similarMovies.map((movie) => (
+                <MovieCard
+                key={movie._id}
+                movie={movie}
+                onMovieClick={(newSelectedMovie) => {
+                    setSelectedMovie(newSelectedMovie);
+                }}
+                />
+            ))}
+            </>
+            );
         }
 
         if (movies.length === 0) {
@@ -40,9 +85,19 @@ export const MainView = () => {
         }
     return (
         <div>
+            <button
+                onClick={() => {
+                    setUser(null);
+                    setToken(null);
+                    localStorage.clear();
+                }}
+            >
+                Logout
+            </button>
+
             {movies.map((movie) => (
                 <MovieCard
-                key={movie.id}
+                key={movie._id}
                 movie={movie}
                 onMovieClick={(newSelectedMovie) => {
                     setSelectedMovie(newSelectedMovie);
