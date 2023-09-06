@@ -3,6 +3,9 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -40,70 +43,113 @@ export const MainView = () => {
         });
     }, [token]);
 
-    // Checks if user is logged in
-    if (!user) {
-        return (
-            <>
-        <LoginView 
-        onLoggedIn={(user, token) => {
-            setUser(user);
-            setToken(token);
-        }} />
-        or
-        <SignupView />
-        </>
-        );
-    }
-    
+
+    return ( 
+        <Row className="justify-content-md-center">
+            {!user ? (
+                // Checks if user is logged in
+            < Col md={5}>
+                <LoginView 
+                onLoggedIn={(user, token) => {
+                setUser(user);
+                setToken(token);
+                }} />
+            <hr/>
+            or
+                <SignupView />
+                </Col>
+            ) : selectedMovie ? (
+                <Col md={8}>
+                    <MovieView
+                    style={{ border: "1px solid green"}}
+                    movie={selectedMovie} 
+                    onBackClick={() => setSelectedMovie(null)} 
+                    />
+                </Col>
+            ) : movies.length === 0 ? (
+                <div>This list is empty!</div>
+            ) : (
+                <>
+                <div>
+                    <Button
+                        onClick={() => {
+                        setUser(null);
+                        setToken(null);
+                        localStorage.clear();
+                        }}
+                        >
+                        Logout
+                    </Button>
+                </div>
+
+                {movies.map((movie) => (
+                    <Col className="mb-5" key={movie._id} md={3}>
+                        <MovieCard
+                        movie={movie}
+                        onMovieClick={(newSelectedMovie) => {
+                        setSelectedMovie(newSelectedMovie);
+                        }}
+                        />
+                    </Col>
+                ))}
+             </>
+            )}
+        </Row>
+    ); 
+}; 
 // if a movie is selected, displays the Movie-view component
-        if (selectedMovie) {
-            let similarMovies = movies.filter((movie) => {
-                return movie._id !== selectedMovie._id && movie.Genre.Name == selectedMovie.Genre.Name;
-            });
-            return (
-            <>
-                <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+        // if (selectedMovie) {
+        //     let similarMovies = movies.filter((movie) => {
+        //         return movie._id !== selectedMovie._id && movie.Genre.Name == selectedMovie.Genre.Name;
+        //     });
+        //     return (
+        //     <>
+        //         <MovieView
+        //         style={{ border: "1px solid green"}}
+        //          movie={selectedMovie} 
+        //          onBackClick={() => setSelectedMovie(null)} 
+        //          />
                 
-                {/* Adds similar movie list */}
-                <hr />
-                <h2>Similar Movies: </h2>
-                {similarMovies.map((movie) => (
-                <MovieCard
-                key={movie._id}
-                movie={movie}
-                onMovieClick={(newSelectedMovie) => {
-                    setSelectedMovie(newSelectedMovie);
-                }}
-                />
-            ))}
-            </>
-            );
-        }
+        //         {/* Adds similar movie list */}
+        //         <hr />
+        //         <h2>Similar Movies: </h2>
+        //         {similarMovies.map((movie) => (
+        //         <MovieCard
+        //         key={movie._id}
+        //         movie={movie}
+        //         onMovieClick={(newSelectedMovie) => {
+        //             setSelectedMovie(newSelectedMovie);
+        //         }}
+        //         />
+        //     ))}
+        //     </>
+        //     );
+        // }
 
-        if (movies.length === 0) {
-            return <div>This list is empty!</div>;
-        }
-    return (
-        <div>
-            <button
-                onClick={() => {
-                    setUser(null);
-                    setToken(null);
-                    localStorage.clear();
-                }}
-            >
-                Logout
-            </button>
+//         if (movies.length === 0) {
+//             return <div>This list is empty!</div>;
+//         }
+//     return (
+//         <div>
+//             <button
+//                 onClick={() => {
+//                     setUser(null);
+//                     setToken(null);
+//                     localStorage.clear();
+//                 }}
+//             >
+//                 Logout
+//             </button>
 
-            {movies.map((movie) => (
-                <MovieCard
-                key={movie._id}
-                movie={movie}
-                onMovieClick={(newSelectedMovie) => {
-                    setSelectedMovie(newSelectedMovie);
-                }}
-                />
-            ))}
-        </div>
-    );
-};
+//             {movies.map((movie) => (
+//                 <MovieCard
+//                 key={movie._id}
+//                 movie={movie}
+//                 onMovieClick={(newSelectedMovie) => {
+//                     setSelectedMovie(newSelectedMovie);
+//                 }}
+//                 />
+//             ))}
+//         </div>
+//     );
+// };
