@@ -23,6 +23,7 @@ return (
                                 {" "}
                                 Home{" "}
                             </Nav.Link>
+                            <Nav.Link as={Link} to="/Profile">Profile</Nav.Link>
                             <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
                         </>
                     )}

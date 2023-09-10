@@ -3,6 +3,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { ProfileView } from "../profile-view/provile-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -22,7 +23,7 @@ export const MainView = () => {
 
 
         fetch("https://my-flix882023-9b8843449882.herokuapp.com/movies", {
-            headers: { Authorization: 'Bearer ${token}' }
+            headers: { Authorization: `Bearer ${token}` }
         })
         .then((response) => response.json())
         .then((data) => {
@@ -122,8 +123,103 @@ export const MainView = () => {
                             </>
                         }
                     />
+                    <Route
+                        path="/profile"
+                        element={
+                            <>
+                                {!user ? (
+                                    <Navigate to="/login" replace />
+                                ) : movies.length === 0 ? (
+                                    <Col>This list is empty!</Col>
+                                ) : (
+                                    <Col>
+                                        <ProfileView movies={movies} />
+                                    </Col>
+                                )}
+                            </>
+                        }
+                    />
                 </Routes>
             </Row>
         </BrowserRouter>
     );
 };
+//             {!user ? (
+//                 // Checks if user is logged in
+//             < Col md={5}>
+//                 <LoginView 
+//                 onLoggedIn={(user, token) => {
+//                 setUser(user);
+//                 setToken(token);
+//                 }} />
+//             <hr/>
+//             or
+//                 <SignupView />
+//                 </Col>
+//             ) : selectedMovie ? (
+//                 <Col md={8}>
+//                     <MovieView
+//                     style={{ border: "1px solid green"}}
+//                     movie={selectedMovie} 
+//                     onBackClick={() => setSelectedMovie(null)} 
+//                     />
+//                 </Col>
+//             ) : movies.length === 0 ? (
+//                 <div>This list is empty!</div>
+//             ) : (
+//                 <>
+//                 <div>
+//                     <Button
+//                         onClick={() => {
+//                         setUser(null);
+//                         setToken(null);
+//                         localStorage.clear();
+//                         }}
+//                         >
+//                         Logout
+//                     </Button>
+//                 </div>
+
+//                 {movies.map((movie) => (
+//                     <Col className="mb-5" key={movie._id} md={3}>
+//                         <MovieCard
+//                         movie={movie}
+//                         onMovieClick={(newSelectedMovie) => {
+//                         setSelectedMovie(newSelectedMovie);
+//                         }}
+//                         />
+//                     </Col>
+//                 ))}
+//              </>
+//             )}
+//         </Row>
+//     ); 
+// }; 
+// if a movie is selected, displays the Movie-view component
+        // if (selectedMovie) {
+        //     let similarMovies = movies.filter((movie) => {
+        //         return movie._id !== selectedMovie._id && movie.Genre.Name == selectedMovie.Genre.Name;
+        //     });
+        //     return (
+        //     <>
+        //         <MovieView
+        //         style={{ border: "1px solid green"}}
+        //          movie={selectedMovie} 
+        //          onBackClick={() => setSelectedMovie(null)} 
+        //          />
+                
+        //         {/* Adds similar movie list */}
+        //         <hr />
+        //         <h2>Similar Movies: </h2>
+        //         {similarMovies.map((movie) => (
+        //         <MovieCard
+        //         key={movie._id}
+        //         movie={movie}
+        //         onMovieClick={(newSelectedMovie) => {
+        //             setSelectedMovie(newSelectedMovie);
+        //         }}
+        //         />
+        //     ))}
+        //     </>
+        //     );
+        // }
