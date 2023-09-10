@@ -27353,83 +27353,7 @@ const MainView = ()=>{
         lineNumber: 51,
         columnNumber: 9
     }, undefined);
-}; //             {!user ? (
- //                 // Checks if user is logged in
- //             < Col md={5}>
- //                 <LoginView 
- //                 onLoggedIn={(user, token) => {
- //                 setUser(user);
- //                 setToken(token);
- //                 }} />
- //             <hr/>
- //             or
- //                 <SignupView />
- //                 </Col>
- //             ) : selectedMovie ? (
- //                 <Col md={8}>
- //                     <MovieView
- //                     style={{ border: "1px solid green"}}
- //                     movie={selectedMovie} 
- //                     onBackClick={() => setSelectedMovie(null)} 
- //                     />
- //                 </Col>
- //             ) : movies.length === 0 ? (
- //                 <div>This list is empty!</div>
- //             ) : (
- //                 <>
- //                 <div>
- //                     <Button
- //                         onClick={() => {
- //                         setUser(null);
- //                         setToken(null);
- //                         localStorage.clear();
- //                         }}
- //                         >
- //                         Logout
- //                     </Button>
- //                 </div>
- //                 {movies.map((movie) => (
- //                     <Col className="mb-5" key={movie._id} md={3}>
- //                         <MovieCard
- //                         movie={movie}
- //                         onMovieClick={(newSelectedMovie) => {
- //                         setSelectedMovie(newSelectedMovie);
- //                         }}
- //                         />
- //                     </Col>
- //                 ))}
- //              </>
- //             )}
- //         </Row>
- //     ); 
- // }; 
- // if a movie is selected, displays the Movie-view component
- // if (selectedMovie) {
- //     let similarMovies = movies.filter((movie) => {
- //         return movie._id !== selectedMovie._id && movie.Genre.Name == selectedMovie.Genre.Name;
- //     });
- //     return (
- //     <>
- //         <MovieView
- //         style={{ border: "1px solid green"}}
- //          movie={selectedMovie} 
- //          onBackClick={() => setSelectedMovie(null)} 
- //          />
- //         {/* Adds similar movie list */}
- //         <hr />
- //         <h2>Similar Movies: </h2>
- //         {similarMovies.map((movie) => (
- //         <MovieCard
- //         key={movie._id}
- //         movie={movie}
- //         onMovieClick={(newSelectedMovie) => {
- //             setSelectedMovie(newSelectedMovie);
- //         }}
- //         />
- //     ))}
- //     </>
- //     );
- // }
+};
 _s(MainView, "Efo6oRZ74411G8xu85sRIo3WHNI=");
 _c = MainView;
 var _c;
@@ -47718,9 +47642,9 @@ const ProfileView = ({ movies })=>{
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
-            children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default), {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default), {
                     onSubmit: handleSubmit,
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
@@ -47850,81 +47774,97 @@ const ProfileView = ({ movies })=>{
                     fileName: "src/components/profile-view/provile-view.jsx",
                     lineNumber: 76,
                     columnNumber: 5
-                }, undefined),
-                "Favorite Movies:",
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                    fileName: "src/components/profile-view/provile-view.jsx",
-                    lineNumber: 131,
-                    columnNumber: 5
-                }, undefined),
-                favoriteMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
-                        className: "mb-5",
-                        md: 3,
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                            movie: movie
-                        }, void 0, false, {
-                            fileName: "src/components/profile-view/provile-view.jsx",
-                            lineNumber: 135,
-                            columnNumber: 15
-                        }, undefined)
-                    }, movie._id, false, {
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/profile-view/provile-view.jsx",
+                lineNumber: 75,
+                columnNumber: 5
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
+                children: [
+                    "Favorite Movies:",
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                         fileName: "src/components/profile-view/provile-view.jsx",
                         lineNumber: 133,
-                        columnNumber: 9
-                    }, undefined)),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("footer", {
-                    children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                        columnNumber: 5
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/profile-view/provile-view.jsx",
+                lineNumber: 131,
+                columnNumber: 5
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
+                children: [
+                    favoriteMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+                            className: "mb-5",
+                            md: 3,
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                                movie: movie
+                            }, void 0, false, {
+                                fileName: "src/components/profile-view/provile-view.jsx",
+                                lineNumber: 139,
+                                columnNumber: 15
+                            }, undefined)
+                        }, movie._id, false, {
                             fileName: "src/components/profile-view/provile-view.jsx",
-                            lineNumber: 140,
+                            lineNumber: 137,
                             columnNumber: 9
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                            fileName: "src/components/profile-view/provile-view.jsx",
-                            lineNumber: 140,
-                            columnNumber: 15
-                        }, undefined),
-                        " ",
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                            fileName: "src/components/profile-view/provile-view.jsx",
-                            lineNumber: 140,
-                            columnNumber: 22
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
-                            fileName: "src/components/profile-view/provile-view.jsx",
-                            lineNumber: 140,
-                            columnNumber: 28
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
-                            children: " Delete account:    "
-                        }, void 0, false, {
-                            fileName: "src/components/profile-view/provile-view.jsx",
-                            lineNumber: 141,
-                            columnNumber: 5
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
-                            variant: "danger",
-                            size: "sm",
-                            onClick: deleteAccount,
-                            children: "Confirm"
-                        }, void 0, false, {
-                            fileName: "src/components/profile-view/provile-view.jsx",
-                            lineNumber: 142,
-                            columnNumber: 5
-                        }, undefined)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/profile-view/provile-view.jsx",
-                    lineNumber: 139,
-                    columnNumber: 5
-                }, undefined)
-            ]
-        }, void 0, true, {
-            fileName: "src/components/profile-view/provile-view.jsx",
-            lineNumber: 75,
-            columnNumber: 5
-        }, undefined)
-    }, void 0, false);
+                        }, undefined)),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("footer", {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                fileName: "src/components/profile-view/provile-view.jsx",
+                                lineNumber: 144,
+                                columnNumber: 9
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                fileName: "src/components/profile-view/provile-view.jsx",
+                                lineNumber: 144,
+                                columnNumber: 15
+                            }, undefined),
+                            " ",
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                fileName: "src/components/profile-view/provile-view.jsx",
+                                lineNumber: 144,
+                                columnNumber: 22
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
+                                fileName: "src/components/profile-view/provile-view.jsx",
+                                lineNumber: 144,
+                                columnNumber: 28
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+                                children: " Delete account:  "
+                            }, void 0, false, {
+                                fileName: "src/components/profile-view/provile-view.jsx",
+                                lineNumber: 145,
+                                columnNumber: 5
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                                variant: "danger",
+                                size: "sm",
+                                onClick: deleteAccount,
+                                children: "Confirm"
+                            }, void 0, false, {
+                                fileName: "src/components/profile-view/provile-view.jsx",
+                                lineNumber: 146,
+                                columnNumber: 5
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/profile-view/provile-view.jsx",
+                        lineNumber: 143,
+                        columnNumber: 5
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/profile-view/provile-view.jsx",
+                lineNumber: 135,
+                columnNumber: 5
+            }, undefined)
+        ]
+    }, void 0, true);
 };
 _s(ProfileView, "KbQQC1bLqGIS0Ox86ULZx97SQz8=");
 _c = ProfileView;

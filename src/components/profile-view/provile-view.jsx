@@ -127,8 +127,12 @@ return (
         <br />
         <Button variant="primary" type="submit" onClick={updateUser}>Update</Button>
     </Form>
+    </Row>
+    <Row>
     Favorite Movies:
     <br/>
+    </Row>
+    <Row>
     {favoriteMovies.map((movie) => (
         <Col className="mb-5" key={movie._id} md={3}>
             
@@ -138,7 +142,7 @@ return (
 
     <footer>
         <br /><br /> <br /><hr/>
-    <Col> Delete account:    </Col>
+    <Col> Delete account:  </Col>
     <Button variant="danger" size="sm" onClick={deleteAccount}>
      Confirm
     </Button>
