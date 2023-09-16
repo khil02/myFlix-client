@@ -1,7 +1,12 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { useState } from "react";
+import { Navbar, Container, Nav, Button, Form, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLoggedOut, searchTerm }) => {
+    const [ searchMovie, setSearchMovie ] = useState("");
+    searchTerm = searchMovie;
+    
+
 return (
     <Navbar bg="light" expand="lg">
         <Container>
@@ -23,8 +28,9 @@ return (
                                 {" "}
                                 Home{" "}
                             </Nav.Link>
-                            <Nav.Link as={Link} to="/Profile">Profile</Nav.Link>
+                            <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
                             <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                            
                         </>
                     )}
                 </Nav>

@@ -7,6 +7,7 @@ import { ProfileView } from "../profile-view/provile-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 
@@ -17,6 +18,8 @@ export const MainView = () => {
     const [ movies, setMovies ] = useState([]);
     const [ user, setUser ] = useState(storedUser? storedUser : null);
     const [ token, setToken ] = useState(storedToken? storedToken : null);
+    const [ searchTerm ] = useState(null);
+    const [ Search, setSearch ] = useState("");
 
     useEffect(() => {
         if (!token) return;
@@ -51,6 +54,7 @@ export const MainView = () => {
         <BrowserRouter>
             <NavigationBar
                 user={user}
+                //searchTerm={searchTerm}
                 onLoggedOut={() => {
                     setUser(null);
                     setToken(null);
@@ -113,11 +117,26 @@ export const MainView = () => {
                                     <Col>This list is empty!</Col> 
                                 ) : (
                                     <>
-                                        {movies.map((movie) => (
+                                        <Row className="my-3">
+                                            <Form>
+                                                <Form.Control
+                                                onChange={(e) => setSearch(e.target.value.toLowerCase())}
+                                                placeholder="Search Movie Title"
+                                                aria-label="Search Movie Title"
+                                                />
+                                            </Form>
+                                        </Row>
+                                        {movies.filter((movie) => {
+                                            return Search === "" ?
+                                            movie :
+                                            movie.Title.toLowerCase().includes(Search);
+                                        }
+                                        ).map((movie) => (
                                             <Col className="mb-5" key={movie._id} md={3}>
                                                 <MovieCard movie={movie} />
                                             </Col>
                                         ))}
+                                        
                                     </>
                                 )}
                             </>
