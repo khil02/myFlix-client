@@ -1,11 +1,7 @@
-import { useState } from "react";
 import { Navbar, Container, Nav, Button, Form, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const NavigationBar = ({ user, onLoggedOut, searchTerm }) => {
-    const [ searchMovie, setSearchMovie ] = useState("");
-    searchTerm = searchMovie;
-    
+export const NavigationBar = ({ user, onLoggedOut }) => {
 
 return (
     <Navbar bg="light" expand="lg">
